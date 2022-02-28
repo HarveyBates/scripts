@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Start tmux session if not open
+if [ ! "$TMUX" ]; then 
+	tmux
+fi
+
+# Split panes if theres only one
+NPANES=`tmux display-message -p '#{window_panes}'`
+NPANES="${NPANES//[$'\t\r\n ']}"
+if [ "$NPANES" -lt 2 ]; then
+	tmux split-window
+	
+	# Select the second pane and go to the current working dir
+	tmux select-pane -t 2
+	cd $PWD
+
+	# Resize the pane down 12
+	tmux resize-pane -D 12
+
+	# Go back to top pane
+	tmux select-pane -t 1
+fi
+
+vi # Open vim
