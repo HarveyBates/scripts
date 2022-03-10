@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# Starts a new session from the current working directory
+# 1. Opens tmux
+# 2. Splits the screen in two
+# 3. Goes to the second pane and navigates to current working dir
+# 4. Resize the pane down a bit
+# 5. Go back to the original pane
+# 6. Open vim 
+
 # Start tmux session if not open
 if [ ! "$TMUX" ]; then 
 	tmux
@@ -21,5 +29,3 @@ if [ "$NPANES" -lt 2 ]; then
 	# Go back to top pane
 	tmux select-pane -t 1
 fi
-
-vi # Open vim
